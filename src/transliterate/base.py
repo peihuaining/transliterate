@@ -286,7 +286,8 @@ class TranslitLanguagePack(object):
                                     fail_silently=fail_silently)
 
         for word in res.split():
-            print(word+' '+h.spell(word))
+            if(h.spell(word)) : print(word+' ok ')
+            else : print(word+' false ')
         return res
 
     def _make_strict(self, value, reversed=False, fail_silently=True):
