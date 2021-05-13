@@ -2,6 +2,7 @@
 
 import re
 import unicodedata
+from hunspell import Hunspell
 
 import six
 
@@ -196,6 +197,7 @@ class TranslitLanguagePack(object):
         if not six.PY3:
             value = unicode(value)
         """词中末尾是gui，将直接对应为гүй"""
+        h = Hunspell('mongolian', hunspell_data_dir='./dict/mn/')
         result=[]
         for word in value.split():
             word = word.strip()
@@ -245,7 +247,7 @@ class TranslitLanguagePack(object):
 
             result.append(word)
         value=' '.join(result)
-        print(value)
+        #print(value)
 
 
 
@@ -283,6 +285,8 @@ class TranslitLanguagePack(object):
                                     reversed=reversed,
                                     fail_silently=fail_silently)
 
+        for word in res.split():
+            print(word+' '+h.spell(word))
         return res
 
     def _make_strict(self, value, reversed=False, fail_silently=True):
