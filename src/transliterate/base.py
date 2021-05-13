@@ -195,6 +195,59 @@ class TranslitLanguagePack(object):
         """
         if not six.PY3:
             value = unicode(value)
+        """词中末尾是gui，将直接对应为гүй"""
+        result=[]
+        for word in value.split():
+            word = word.strip()
+            if word.endswith('gui') :
+                #word = word.replace('gui', 'гүй')
+                word = word[0:len(word) - 3] + 'гүй'
+            if (word.endswith('in')) and not (word.endswith('iin')):
+                 #word = word.replace('in', 'iin')
+                word = word[0:len(word) - 2] + 'iin'
+                #print(word)
+            if word=='ni':
+                word = word.replace('ni', 'нь')
+            result.append(word)
+        value=' '.join(result)
+        """判定value值在蒙语中的阴阳性   + 阳性  -阴性"""
+        """词中有aou同时出现的情况，将U,对应y，有э（e），и（i，ii）对应为Y"""
+        result=[]
+        for word in value.split() :
+            teststr1=['a','o','ya','yo']
+            teststr2=['e','i','ii']
+            if word.find('u')!=-1 and word.find('yu')==-1:
+                for i in teststr1 :
+                    if word.find(i)!=-1:
+                        word = word.replace('ui', 'yй')
+                        word=word.replace('u','y')
+                        #print('nonononono'+word)
+                for i in teststr2 :
+                    if word.find(i)!=-1:
+                        word = word.replace('ui', 'үй')
+                        word=word.replace('u','ү')
+                        #print('hahahah'+word)
+
+
+            if word.find('i') != -1 and word.find('ai')==-1 and word.find('ei')==-1 and word.find('oi')==-1 and word.find('ui')==-1:
+
+                teststr1.append('y')
+                for i in teststr1:
+                    if word.endswith('iin')  :
+                        word = word[0:len(word)-3]+'ын'
+                        #word = word.replace('i', 'Ы')
+                        print('____'+word)
+                for i in teststr2:
+                    if word.find(i) != -1:
+                        word = word.replace('ii', 'ий')
+                        word = word.replace('i', 'и')
+                        # print(word)
+
+            result.append(word)
+        value=' '.join(result)
+        print(value)
+
+
 
         if reversed:
             # Handling reversed specific translations (one side only).

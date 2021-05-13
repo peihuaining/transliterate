@@ -44,7 +44,6 @@ pre_processor_mapping = {
     u"UI": u"УЙ",
     u"KH": u"Х",
     u"kh": u"х",
-    u"gui": u"гүй",
 }
 reversed_specific_pre_processor_mapping = {
     u"щ": u"sh",
