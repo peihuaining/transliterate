@@ -71,6 +71,10 @@ or install the latest stable version from GitHub:
 
 That's all. See the `Usage and examples`_ section for more.
 
+Editted subject：
+make mongolian language much better.
+
+
 Usage and examples
 ==================
 Simple usage
